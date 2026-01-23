@@ -3,20 +3,21 @@
 law run cf.PlotVariables1D \
     --version mytest \
     --configs 24_v15_central \
-    --datasets dy_mumu_m800to1500_powheg \
+    --datasets data_mu_e \
     --producers default \
     --variables nmu \
     --categories ceormu \
     --view-cmd imgcat \
     $1 
-    #--workflow slurm \
-    #--parallel-jobs 300 \
+    # --parallel-jobs 300 \
+    # --workflow slurm \
 
     # FIXME to test out the functionality of these
-    #--limit-dataset-files 1 \
-    #--log-file slurm
+    # --limit-dataset-files 1 \
+    # --log-file slurm
     # --workers 6 
     # --pilot 
+    # --branch 1
 
     # remove outputs (example):
 #   law run cf.SelectEvents --version mytest --remove-output  3
