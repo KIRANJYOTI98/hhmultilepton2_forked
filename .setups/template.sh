@@ -20,7 +20,6 @@ export LAW_CMS_VO="cms"
 #===== on manivald ==========
 export WLCG_FILE_SYSTEM="wlcg_fs_manivald"
 export CF_CRAB_STORAGE_ELEMENT="T2_EE_Estonia"
-export CF_CRAB_BASE_DIRECTORY="/store/user/$CF_CERN_USER/HHMultilepton_Run3/cf_crab_outputs"
 export CF_CRAB_SANDBOX_NAME="CMSSW_10_6_18::arch=slc7_amd64_gcc700"
 export CF_SLURM_FLAVOR="manivald"
 export CF_SLURM_PARTITION="main"
@@ -30,7 +29,6 @@ export TMPDIR="/scratch/local/$CF_CERN_USER"
 #===== on lxplus ============
 #export WLCG_FILE_SYSTEM="wlcg_fs_cernbox"
 #export CF_CRAB_STORAGE_ELEMENT="T2_CH_CERN"
-#export CF_CRAB_BASE_DIRECTORY="$CF_CLUSTER_LOCAL_PATH/cf_crab_outputs"
 #export CF_CRAB_SANDBOX_NAME="CMSSW_14_2_1::arch=el9_amd64_gcc21"
 export CF_HTCONDOR_FLAVOR="cern_el9"   # or "cern" for older versions of lxplus not using ELMA9
 export CF_HTCONDOR_MEMORY=2GB
@@ -40,6 +38,7 @@ export CF_HTCONDOR_RUNTIME="3h"
 #export TMPDIR="/tmp/$CF_CERN_USER"
 #============================
 
+export CF_CRAB_BASE_DIRECTORY="/store/user/$CF_CERN_USER/HHMultilepton_Run3/cf_crab_outputs"
 export CF_STORE_LOCAL="$CF_CLUSTER_LOCAL_PATH/$CF_STORE_NAME"
 export CF_WLCG_CACHE_ROOT="$CF_CLUSTER_LOCAL_PATH/cf_scratch"
 export CF_JOB_BASE="$CF_CLUSTER_LOCAL_PATH/cf_jobs"

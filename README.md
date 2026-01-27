@@ -29,8 +29,8 @@ For further questions please, contact t\*\*\*\*.l\*\*\*\*@no-spam-cern.ch.
 ## First time setup
 
 ```shell
-# 1. clone the project
-git clone --recursive git@github.com:HEP-KBFI/hhmultilepton2.git
+# 1. fork then clone the project
+git clone --recursive git@github.com:<your-github-user-name>/hhmultilepton2.git
 cd hhmultilepton2
 
 # 2. get a voms token
@@ -39,7 +39,7 @@ voms-proxy-init -voms cms -rfc -valid 196:00
 # 3. copy the provided template to a new file (you can choose any <setup_name>):
 cp .setups/template.sh .setups/<setup_name>.sh
 
-# 4. open .setups/mydev.sh in your editor and adjust any environment variables or paths as needed for your local setup.
+# 4. open .setups/dev.sh in your editor and adjust any environment variables or paths as needed for your local setup.
 # then source the main setup script with your custom setup name:
 source setup.sh <setup_name> [sandbox_type]
 ```
@@ -49,8 +49,8 @@ Arguments:
   <setup_name>     Name of the setup (random name of your choice)
   [sandbox_type]   Optional: choose between 'minimal' (default) or 'full'
 Examples:
-  source setup.sh mydev            # uses 'minimal' environment from (sandboxes/venv_multilepton.sh)
-  source setup.sh mydev full       # uses 'full' environment from (sandboxes/venv_multilepton_dev.sh) 
+  source setup.sh dev            # uses 'minimal' environment from (sandboxes/venv_multilepton.sh)
+  source setup.sh dev full       # uses 'full' environment from (sandboxes/venv_multilepton_dev.sh) 
 ```
 
 Note: If you prefer not to use the provided template, you can still activate the environment manually by running:
@@ -76,27 +76,7 @@ modules/
 └── cmsdb/              # CMS database utilities
 ```
 
-Complete Update Procedure:
-
-### 1️⃣ Stash Local Changes (Preserve WIP)
-
-First, save all your work-in-progress changes across all submodules:
-
-```bash
-cd hhmultilepton2/modules
-
-# Stash parent repository changes
-git stash push -m "WIP: parent repository"
-
-# Stash all submodule changes recursively (including nested submodules)
-git submodule foreach --recursive 'git stash push -m "WIP: $(basename $PWD)" || true'
-
-# Verify everything is clean
-git status
-git submodule foreach --recursive 'git status'
-```
-
-### 2️⃣ Update All Submodules
+### Update All Submodules
 
 Fetch and update all submodules to their latest upstream versions:
 
@@ -108,68 +88,6 @@ git submodule update --remote --recursive
 git submodule status --recursive
 ```
 
-**Note:** This updates submodules based on the branch specified in `.gitmodules`. To update a specific submodule to a different branch/tag:
-```bash
-cd columnflow
-git checkout [branch/tag/commit]
-cd ..
-```
-
-### 3️⃣ Commit Updated Submodule Pointers
-
-Commit the updated submodule references in the parent repository:
-
-```bash
-# Add updated submodule pointers
-git add columnflow cmsdb
-
-# Commit the update
-git commit -m "Update submodules: columnflow, cmsdb (including nested law and order)"
-
-# Push to your branch
-git push origin <your-branch-name>
-```
-
-### 4️⃣ Restore Your Local Changes
-
-Bring back your stashed work:
-
-```bash
-# Restore parent repository changes
-git stash pop
-
-# Restore all submodule changes recursively
-git submodule foreach --recursive 'git stash pop || true'
-
-# Verify restoration
-git status
-git submodule foreach --recursive 'git status'
-```
-
-### Troubleshooting
-
-#### - If Stash Conflicts Occur
-```bash
-# List all stashes
-git stash list
-git submodule foreach --recursive 'echo "=== $path ===" && git stash list'
-
-# Apply specific stash (skip conflicts)
-git stash apply stash@{0}
-```
-
-#### - Check Submodule Information
-```bash
-# Show all submodule status
-git submodule status --recursive
-
-# Show submodule URLs
-cat .gitmodules
-
-# Show specific submodule info
-git config -f .gitmodules --get-regexp submodule
-```
-
 ## Usage 
 
 1. Setup your enviorement (**always**):
@@ -177,8 +95,8 @@ git config -f .gitmodules --get-regexp submodule
 ```shell
 voms-proxy-init -voms cms -rfc -valid 196:00
 
-# source the setup and export env in the sorted file " .setups/mydev.sh " in this case
-source setup.sh mydev
+# source the setup and export env in the sorted file " .setups/dev.sh " in this case
+source setup.sh dev
 ```
 
 2. Try to run on 1 signal, 1 backgound and 1 data locally:
